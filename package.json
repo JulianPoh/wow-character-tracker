@@ -1,0 +1,27 @@
+{
+  "name": "wow-character-tracker",
+  "version": "1.0.0",
+  "description": "App to track the Characters created by a User on World of Warcraft.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulianPoh/wow-character-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulianPoh/wow-character-tracker/issues"
+  },
+  "homepage": "https://github.com/JulianPoh/wow-character-tracker#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-dom": "^5.12.0",
+    "express-react-views": "^0.10.5",
+    "nodemon": "^1.17.5",
+    "sha256": "^0.2.0"
+  }
+}
