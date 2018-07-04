@@ -38,10 +38,13 @@ const config = {
   database: 'wow',
   port: 5432,
 };
-const db = new pg.Pool(config);
 
-module.exports = db;
 
+const pool = new pg.Pool(config);
+
+pool.on('error', function (err) {
+  console.log('Idle client error', err.message, err.stack);
+});
 
 /*
 //============================================================================>>
@@ -51,27 +54,29 @@ module.exports = db;
 //============================================================================>>
 */
 
-//<<<< GET CREATE USER FORM >>>>
-app.get('/users/new', (request, response) => {
-    response.render('Register');
-});
-//<<<< CREATE USER FUNCTION >>>>
-app.post('/users/new', (request, response) => {
+//GET CREATE NEW USER FORM
+const newUserForm = (request, response) => {
+    response.render('newUser');
+};
+//CREATE NEW USER
+const postUser = (request, response) => {
     let password = sha256( request.body.password );
-    let queryText = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
-    const values = [request.body.name, request.body.email, password];
+    let userName = request.body.name;
+    let userEmail = request.body.email;
+    let userLoc = request.body.location;
+    let queryText = 'INSERT INTO users (name, email, password, location) VALUES ($1, $2, $3, $4) RETURNING *';
+    const values = [userName, userEmail, password, userLoc];
     pool.query(queryText, values, (err, queryResult) => {
         if ( err ){
-            response.send('db error: '+ err.message)
+            response.send('DB error: '+ err.message)
         }else{
             let user_id = queryResult.rows[0].id;
-            let userName = queryResult.rows[0].name;
             response.cookie('logged_in', 'true');
             response.cookie('user_id', user_id);
-            response.send( "Created New User " + user_id )
+            response.send( "Created New User " + userName )
         }
     });
-});
+};
 
 
 /*
@@ -86,13 +91,14 @@ app.post('/users/new', (request, response) => {
 app.get('/users/login', (request, response) => {
     response.render('Login');
 });
+
 //<<<< LOGIN FUNCTION >>>>
 app.post('/users/login', (request, response) => {
     let queryText = 'SELECT * FROM users WHERE email=$1';
     const values = [request.body.email];
     pool.query(queryText, values, (err, queryResult) => {
         if( err ){
-            response.send('db error: '+ err.message)
+            response.send('DB error: '+ err.message)
         }else{
             const queryRows = queryResult.rows;
             console.log( queryRows );
@@ -105,7 +111,7 @@ app.post('/users/login', (request, response) => {
                 if( db_pass_hash ===  request_pass_hash ){
                     response.cookie('logged_in', 'true');
                     response.cookie('user_id', queryRows[0].id);
-                    response.send("Welcome User "+queryRows[0].id);
+                    response.send("Welcome Player "+queryRows[0].name);
                 }else{
                     response.status(401).send('Access Denied');
                 }
@@ -122,11 +128,9 @@ app.post('/users/login', (request, response) => {
 <<============================================================================>>
 <<============================================================================>>
 */
- const getRoot = (request, response) => {
-  // query database for all pokemon
+ const getHome = (request, response) => {
+  // query database for all characters
 
-  // respond with HTML page displaying all pokemon
-  //
   const queryString = 'SELECT * from characters;';
   pool.query(queryString, (err, result) => {
     if (err) {
@@ -135,7 +139,7 @@ app.post('/users/login', (request, response) => {
       console.log('Query result:', result);
 
       // redirect to home page
-      response.render( 'Home', {characters: result.rows} );
+      response.render( 'home', {characters: result.rows} );
     }
   });
 }
@@ -148,14 +152,14 @@ app.post('/users/login', (request, response) => {
 <<============================================================================>>
 <<============================================================================>>
 */
-//<<<< GET FORM >>>>
-const getNew = (request, response) => {
-  response.render('newCharacter');
+//GET FIND CHARACTER FORM
+const getNewChar = (request, response) => {
+  response.render('newChar');
 }
-//<<<< FIND Character BY ID >>>>
-const getCharacters = (request, response) => {
-  let id = request.params['id'];
-  const queryString = 'SELECT * FROM characters WHERE id = ' + id + ';';
+//FIND CHARACTER BY NAME
+const getChar = (request, response) => {
+  let charName = request.params['name'];
+  const queryString = 'SELECT * FROM characters WHERE name = ' + name + ';';
   pool.query(queryString, (err, result) => {
     if (err) {
       console.error('Query error:', err.stack);
@@ -163,12 +167,12 @@ const getCharacters = (request, response) => {
       console.log('Query result:', result);
 
       // redirect to home page
-      response.render( 'Character', {characters: result.rows[0]} );
+      response.render( 'characters', {characters: result.rows[0]} );
     }
   });
 }
 //<<<< SAVE NEW CHARACTER >>>>
-const postCharacter = (request, response) => {
+const postChar = (request, response) => {
   let params = request.body;
   if (request.cookies['logged_in'] === 'true') {
       const queryString = 'INSERT INTO characters(id, num, name, image, height, weight, user_id) VALUES($1, $2, $3, $4, $5, $6, $7);';
@@ -198,8 +202,8 @@ const postCharacter = (request, response) => {
 <=============================================================================>>
 <<============================================================================>>
 */
-//<<<< GET FORM >>>>
-const editCharacterForm = (request, response) => {
+//GET EDIT CHARACTER FORM
+const editCharForm = (request, response) => {
   let id = request.params['id'];
   const queryString = 'SELECT * FROM characters WHERE id = ' + id + ';';
   pool.query(queryString, (err, result) => {
@@ -209,12 +213,12 @@ const editCharacterForm = (request, response) => {
       console.log('Query result:', result);
 
       // redirect to home page
-      response.render( 'Edit', {characters: result.rows[0]} );
+      response.render( 'editChar', {characters: result.rows[0]} );
     }
   });
 }
-//<<<<  EDIT FUNCTION >>>>
-const updateCharacter = (request, response) => {
+//SAVE EDIT CHARACTER
+const updateChar = (request, response) => {
   let id = request.params['id'];
   let char = request.body;
   const queryString = 'UPDATE "characters" SET "name"=($2), "img"=($3), "height"=($4), "weight"=($5) WHERE "id"=($1)';
@@ -242,11 +246,11 @@ const updateCharacter = (request, response) => {
 */
 
 //<<<< GET FORM >>>>
-const deleteCharacterForm = (request, response) => {
+const deleteCharForm = (request, response) => {
   response.send("COMPLETE ME");
 }
 //<<<< DELETE FUNCTION >>>>
-const deleteCharacter = (request, response) => {
+const deleteChar = (request, response) => {
   response.send("COMPLETE ME");
 }
 
@@ -258,21 +262,20 @@ const deleteCharacter = (request, response) => {
 //===============================================================
 //===============================================================
 */
-app.get('/', );
+//Home Route
+app.get('/', getHome);
 
-app.get('/character/edit', editCharacterForm);
-app.get('/character/new', getNew);
-app.get('/character/:id', getCharacter);
-app.get('/character/:id/delete', deleteCharacterForm);
-app.get('/hello', (request, response) => {
-  response.render('hello');
-});
+//User Routes
+app.get('/users/new', newUserForm);
 
-app.post('/pokemon', postCharacter);
-
-app.put('/pokemon/:id', updateCharacter);
-
-app.delete('/pokemon/:id', deleteCharacter);
+//Character Routes
+app.get('/character/edit', editCharForm);
+app.get('/character/new', getNewChar);
+app.get('/character/:id', getChar);
+app.get('/character/:id/delete', deleteCharForm);
+app.post('/character', postChar);
+app.put('/character/:name', updateChar);
+app.delete('/character/:name', deleteChar);
 
 
 app.listen(3000, () => {console.log('Portal 3000 to Azeroth has been opened.')});
