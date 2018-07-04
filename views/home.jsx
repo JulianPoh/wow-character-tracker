@@ -1,20 +1,18 @@
-var React = require('react');
+var React = require("react");
 
 class Home extends React.Component {
   render() {
-
-    let message = "welcome!";
-
-    //Check for User Login
-    if( name.length > 5 ){
-      messgae = "welcome! What a long name you have!";
-    }
-
+    console.log(this);
     return (
-      <div>
-        <h1>Hello, { this.props.name }!</h1>
-        <h1>{ message }</h1>
-      </div>
+      <html>
+        <head />
+        <body>
+          <h1>Welcome to Azeroth</h1>
+          <a href="/users/login">USER LOGIN</a>
+          <br/>
+          <a href="/users/new">CREATE NEW USER</a>
+        </body>
+      </html>
     );
   }
 }
