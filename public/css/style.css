@@ -1,0 +1,12 @@
+body {
+    background-image: url();
+    background-repeat: no-repeat;
+    background-position: cover;
+    font-family: 'Averia Libre', cursive;
+    color: white;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+}

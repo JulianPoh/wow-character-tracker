@@ -1,14 +1,30 @@
 var React = require("react");
 
-
 class NewChar extends React.Component {
   render() {
-    // const allegiance = this.state.allegiance;
+
+    const bodyStyle = {
+      backgroundColor: '#343B22',
+      color: 'white',
+      fontFamily: 'Averia Libre'
+    }
+
+    const containerStyle = {
+      width: '400px',
+      margin: '0 auto',
+      verticalAlign: 'center',
+      color: 'white'
+    }
+
     return (
       <html>
-        <head />
-        <body>
-          <h1>New Character Creation</h1>
+        <head>
+        <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
+        <link href="css/style.css"/>
+        </head>
+        <body style={bodyStyle}>
+          <div className="container" style={containerStyle}>
+            <h1>New Character Creation</h1>
             <form method="POST" action="/characters/new">
                 Name: <br/>
                 <input name="name" type="text" placeholder="New Character Name"/><br/>
@@ -35,7 +51,8 @@ class NewChar extends React.Component {
                 <br/>
                 <input type="submit" value="Create New Character" /><br/>
             </form>
-            <script src="/script.js"></script>
+          </div>
+          <script src="/script.js"></script>
         </body>
       </html>
     );
