@@ -15,19 +15,19 @@ class NewChar extends React.Component {
                 <br/>
                 Faction: <br/>
                 <select name="allegiance" id="select-faction">
-                  <option selected="selected" value="chooseAllegiance">CHOOSE YOUR ALLEGIANCE</option>
+                  <option selected="selected" value="chooseAllegiance">Choose Your Allegiance</option>
                   <option value="alliance">Alliance</option>
                   <option value="horde">Horde</option>
                 </select><br />
                 <br/>
                 Race: <br/>
                 <select name="race" id="select-race">
-                  <option selected="selected" value="chooseRace">CHOOSE A RACE</option>
+                  <option selected="selected" value="chooseRace">Select Race</option>
                 </select><br />
                 <br/>
                 Class: <br/>
                 <select name="class" id="select-class">
-                  <option selected="selected" value="chooseClass">CHOOSE A CLASS</option>
+                  <option selected="selected" value="chooseClass">Select Class</option>
                 </select><br />
                 <br/>
                 Image: <br/>
