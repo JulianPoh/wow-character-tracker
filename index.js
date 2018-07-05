@@ -15,7 +15,7 @@ const pg = require('pg');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cookieParser());
-
+app.use(express.static('public'));
 
 // Set react-views to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
