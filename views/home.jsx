@@ -8,9 +8,9 @@ class Home extends React.Component {
         <head />
         <body>
           <h1>Welcome to Azeroth</h1>
-          <a href="/users/login">USER LOGIN</a>
+          <a href="/user/login">USER LOGIN</a>
           <br/>
-          <a href="/users/new">CREATE NEW USER</a>
+          <a href="/user/new">CREATE NEW USER</a>
         </body>
       </html>
     );

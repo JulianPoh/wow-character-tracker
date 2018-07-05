@@ -88,12 +88,12 @@ const postUser = (request, response) => {
 */
 
 //<<<< LOGIN FORM >>>>
-app.get('/users/login', (request, response) => {
-    response.render('Login');
-});
+const userLogin = (request, response) => {
+    response.render('login');
+};
 
 //<<<< LOGIN FUNCTION >>>>
-app.post('/users/login', (request, response) => {
+app.post('/user/login', (request, response) => {
     let queryText = 'SELECT * FROM users WHERE email=$1';
     const values = [request.body.email];
     pool.query(queryText, values, (err, queryResult) => {
@@ -159,7 +159,7 @@ const getNewChar = (request, response) => {
 //FIND CHARACTER BY NAME
 const getChar = (request, response) => {
   let charName = request.params['name'];
-  const queryString = 'SELECT * FROM characters WHERE name = ' + name + ';';
+  const queryString = 'SELECT * FROM characters WHERE name = ' + charName + ';';
   pool.query(queryString, (err, result) => {
     if (err) {
       console.error('Query error:', err.stack);
@@ -175,8 +175,8 @@ const getChar = (request, response) => {
 const postChar = (request, response) => {
   let params = request.body;
   if (request.cookies['logged_in'] === 'true') {
-      const queryString = 'INSERT INTO characters(id, num, name, image, height, weight, user_id) VALUES($1, $2, $3, $4, $5, $6, $7);';
-      const values = [params.id, params.num, params.name, params.img, params.height, params.weight, params.user_id]; 
+      const queryString = 'INSERT INTO characters(name, allegiance, race, class, image, user_id) VALUES($1, $2, $3, $4, $5, $6,);';
+      const values = [params.name, params.allegiance, params.race, params.class, params.image, users]; 
   } else {
       const queryString = 'INSERT INTO characters(id, num, name, image, height, weight) VALUES($1, $2, $3, $4, $5, $6);';
       const values = [params.id, params.num, params.name, params.img, params.height, params.weight]; 
@@ -221,7 +221,7 @@ const editCharForm = (request, response) => {
 const updateChar = (request, response) => {
   let id = request.params['id'];
   let char = request.body;
-  const queryString = 'UPDATE "characters" SET "name"=($2), "img"=($3), "height"=($4), "weight"=($5) WHERE "id"=($1)';
+  const queryString = 'UPDATE "characters" SET "name"=($2), "race"=($3), "height"=($4), "weight"=($5) WHERE "id"=($1)';
   const values = [char.name, char.img, char.height, char.weight, id];
   console.log(queryString);
   pool.query(queryString, values, (err, result) => {
@@ -266,7 +266,8 @@ const deleteChar = (request, response) => {
 app.get('/', getHome);
 
 //User Routes
-app.get('/users/new', newUserForm);
+app.get('/user/new', newUserForm);
+app.get('/user/login', userLogin);
 
 //Character Routes
 app.get('/character/edit', editCharForm);

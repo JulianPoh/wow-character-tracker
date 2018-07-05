@@ -12,16 +12,20 @@ class NewUser extends React.Component {
             <form method="POST" action="/users/new">
                 Name: <br/>
                 <input name="name" type="text" /><br/>
+                <br/>
                 Email: <br/>
                 <input name="email" type="email" /><br/>
+                <br/>
                 Password:<br/>
                 <input name="password" type="password" /><br/>
+                <br/>
                 Location:<br/>
                 <select name="location">
                   <option selected="selected" value="USA">North America</option>
                   <option value="Europe">Europe</option>
                   <option value="Asia">Asia</option>
-                </select> 
+                </select><br/>
+                <br/>
                 <input type="submit" value="Sign Up" /><br/>
             </form>
         </body>
