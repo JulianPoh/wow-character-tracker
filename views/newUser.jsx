@@ -9,7 +9,7 @@ class NewUser extends React.Component {
         <head />
         <body>
           <h1>New User Registration</h1>
-            <form method="POST" action="/users/new">
+            <form method="POST" action="/user/new">
                 Name: <br/>
                 <input name="name" type="text" /><br/>
                 <br/>
@@ -21,9 +21,11 @@ class NewUser extends React.Component {
                 <br/>
                 Location:<br/>
                 <select name="location">
-                  <option selected="selected" value="USA">North America</option>
-                  <option value="Europe">Europe</option>
-                  <option value="Asia">Asia</option>
+                  <option selected="selected" value="NACA">North America & Canada</option>
+                  <option value="SA">South America</option>
+                  <option value="EU">Europe</option>
+                  <option value="AS">Asia</option>
+                  <option value="AUNZ">Australia & New Zealand</option>
                 </select><br/>
                 <br/>
                 <input type="submit" value="Sign Up" /><br/>

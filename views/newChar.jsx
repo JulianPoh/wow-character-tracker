@@ -25,7 +25,7 @@ class NewChar extends React.Component {
         <body style={bodyStyle}>
           <div className="container" style={containerStyle}>
             <h1>New Character Creation</h1>
-            <form method="POST" action="/characters/new">
+            <form method="POST" action="/character/new">
                 Name: <br/>
                 <input name="name" type="text" placeholder="New Character Name"/><br/>
                 <br/>
@@ -39,6 +39,13 @@ class NewChar extends React.Component {
                 Race: <br/>
                 <select name="race" id="select-race">
                   <option selected="selected" value="chooseRace">Select Race</option>
+                </select><br />
+                <br/>
+                Gender: <br/>
+                <select name="gender" id="select-gender">
+                  <option selected="selected" value="chooseRace">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select><br />
                 <br/>
                 Class: <br/>
