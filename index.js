@@ -11,11 +11,13 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const pg = require('pg');
 const sha256 = require('js-sha256');
+const flash = require('connect-flash');
 var Alert = require('react-bootstrap/lib/Alert');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cookieParser());
+app.use(flash());
 app.use(express.static('public'));
 
 // Set react-views to be the default view engine
@@ -84,11 +86,10 @@ const postNewUser = (request, response) => {
             console.log('Creating New User.');
             response.cookie('logged_in', 'true');
             response.cookie('user_id', user_id);
-            response.send( "Created New User " + userName )
-            // redirect to home page
-            response.redirect('/user/userHome');
+            response.send('New User Created. Redirecting to User Home Page.');
+            response.redirect('userHome');
         }
-    });
+    })
 };
 
 
@@ -102,7 +103,7 @@ const userLogin = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
     if (isLoggedIn === 'true') {
-      response.render('userHome');
+        response.render('userHome');
     } else {
         let queryText = 'SELECT * FROM users WHERE email=$1';
         const values = [request.body.email];
@@ -120,7 +121,7 @@ const userLogin = (request, response) => {
                     if ( db_pass_hash ===  request_pass_hash ){
                         response.cookie('logged_in', 'true');
                         response.cookie('user_id', queryRows[0].id);
-                        response.redirect('/userHome');
+                        response.render('userHome');
                     } else {
                         response.status(401).send('Access Denied');
                     }
@@ -133,24 +134,36 @@ const userLogin = (request, response) => {
 
 //GET USER HOME PAGE
 const userHome = (request, response) => {
+    let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
-    const queryString = 'SELECT * from characters WHERE users_id = $1 ORDER BY characters.name ASC;';
-    pool.query(queryString, (err, result) => {
-        if (err) {
-            console.error('Query error:', err.stack);
+    if (isLoggedIn === 'true') {
+        let queryString;
+        let values = [currentUserId];
+        if (request.query.sortby == "name") {
+            queryString = 'SELECT * FROM characters WHERE users_id = $1 ORDER BY characters.name ASC;'
         } else {
-            console.log('Query result:', result);
-            response.render('userhome', {characters: result.rows});
+            queryString = 'SELECT * FROM characters WHERE users_id = $1 ORDER BY characters.id ASC;'
         }
-    })
+        db.query(queryString, values, (err, result) => {
+        if (err) {
+            console.error('query error:', err.stack);
+        } else {
+            console.log(result.rows);
+            let charinfo = result.rows.map( characters => { return {"Name": characters.name, "Race": characters.characters_race, "Class": characters.class, "Faction": characters.faction }; })
+            let context = { charinfo: charinfo, cookies: request.cookies };
+            response.render('userHome', context);
+            }
+        });
+    } else {
+        response.redirect('/');
+    }
 };
-
 
 // USER LOGOUT FUNCTION 
 const userLogout = (req, response) => {
   response.clearCookie('user_id');
   response.clearCookie('logged_in');
-  response.redirect('/user/login');
+  response.render('logout');
 };
 
 
@@ -184,7 +197,7 @@ const updateUser = (request, response) => {
         } else {
             console.log('Query result:', result);
             // redirect to home page
-            response.redirect('/userHome');
+            response.render('userHome');
             respond.send('User Details Updated.');
         }
     });
@@ -201,8 +214,8 @@ const deleteUser = (request, response) => {
             response.status(500).send('error 9: ' + err.message);
         } else {
         // redirect to home page
-        response.redirect('/user');
-        response.send('User Deleted');
+        response.redirect('/');
+        request.flash('User Deleted');
         }
     });
 }
@@ -347,7 +360,7 @@ app.post('/user/new', postNewUser);
 app.get('/user/login', userLoginForm);
 app.post('/user/login', userLogin);
 app.get('user/userhome', userHome);
-app.delete('/user/logout', userLogout);
+app.delete('/logout', userLogout);
 app.get('/user/:id/edit', editUserForm);
 app.put('/user/:id/edit', updateUser);
 app.delete('/user/:id/edit', deleteUser);
@@ -362,14 +375,14 @@ app.delete('/character/:id', deleteChar);
 
 
 app.listen(3000, () => {
-    console.log('Opening...                 ');
-    console.log('         {{{{{}}}}         ');
-    console.log('      {{{         }}}      ');
-    console.log('    {{{   PORTAL    }}}    ');
-    console.log('   {{{     3000      }}}   ');
-    console.log('   {{{      TO       }}}   ');
-    console.log('    {{{   AZEROTH   }}}    ');
-    console.log('      {{{         }}}      ');
-    console.log('         {{{{}}}}}         ');
-    console.log('---------------------------');
+    console.log(' ------------------------- ');
+    console.log('|        {{{{{}}}}        |');
+    console.log('|     {{{         }}}     |');
+    console.log('|   {{{   PORTAL    }}}   |');
+    console.log('|  {{{     3000      }}}  |');
+    console.log('|  {{{      TO       }}}  |');
+    console.log('|   {{{   AZEROTH   }}}   |');
+    console.log('|     {{{         }}}     |');
+    console.log('|        {{{{}}}}}        |');
+    console.log(' ------------------------- ');
 });

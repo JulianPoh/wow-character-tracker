@@ -1,6 +1,6 @@
 var React = require("react");
 
-class Home extends React.Component {
+class Logout extends React.Component {
   render() {
   
     const bodyStyle = {
@@ -40,15 +40,10 @@ class Home extends React.Component {
             <div className='container' style={containerStyle}>
             
               <img src="/img/wow-logo.png" style={logoStyle}/>
-            </div>
-            <br/> 
-            <div className='container' style={containerStyle}>  
-              <a href="/character/new"><button style={buttonStyle}>ADD NEW CHARACTER</button></a>
-              <a href="/character/edit"><button style={buttonStyle}>EDIT EXISTING CHARACTER</button></a>
-              <a href="/logout"><button style={buttonStyle}>CURRENT USER LOGOUT</button></a>
+              <br/> 
             </div>
 
-
+            <h2 style={h1Style}> LOGOUT SUCCESSFUL </h2>
           
           </body>
         
@@ -57,4 +52,4 @@ class Home extends React.Component {
     }
   }
 
-module.exports = Home;
+module.exports = Logout;

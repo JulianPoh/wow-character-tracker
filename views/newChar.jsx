@@ -4,27 +4,42 @@ class NewChar extends React.Component {
   render() {
 
     const bodyStyle = {
-      backgroundColor: '#343B22',
-      color: 'white',
       fontFamily: 'Averia Libre'
     }
 
     const containerStyle = {
-      width: '400px',
       margin: '0 auto',
-      verticalAlign: 'center',
-      color: 'white'
+      textAlign: 'center',
+    }
+
+    const logoStyle = {
+      maxWidth: '30%',
+      textAlign: 'center',
+    }
+
+    const h1Style = {
+      textAlign: 'center'
+    }    
+  
+      const buttonStyle = {
+      margin: '0 5px',
+      width: '165px'
     }
 
     return (
       <html>
         <head>
         <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossOrigin="anonymous"/>
         <link href="css/style.css"/>
         </head>
         <body style={bodyStyle}>
+              
           <div className="container" style={containerStyle}>
-            <h1>New Character Creation</h1>
+            
+            <img src="/img/wow-logo.png" style={logoStyle}/>
+            <h2 style={h1Style}>New Character Creation</h2>
+
             <form method="POST" action="/character/new">
                 Name: <br/>
                 <input name="name" type="text" placeholder="New Character Name"/><br/>
@@ -58,7 +73,9 @@ class NewChar extends React.Component {
                 <br/>
                 <input type="submit" value="Create New Character" /><br/>
             </form>
+            
           </div>
+          
           <script src="/newCharScript.js"></script>
         </body>
       </html>

@@ -39,8 +39,8 @@ class NewUser extends React.Component {
           
           <div className='container' style={containerStyle}>
             
-            <img src="/img/wow-logo.jpg" style={logoStyle}/>
-            <h1 style={h1Style}>CHARACTER TRACKER</h1> 
+            <img src="/img/wow-logo.png" style={logoStyle}/>
+            <br/>
             <h2>New User Registration</h2>
               
             <form method="POST" action="/user/new">

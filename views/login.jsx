@@ -13,7 +13,7 @@ class Login extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '50%',
+      maxWidth: '30%',
       textAlign: 'center',
     }
 
@@ -21,7 +21,7 @@ class Login extends React.Component {
       textAlign: 'center'
     } 
 
-  
+    
       return(
         <html>
           
@@ -34,8 +34,8 @@ class Login extends React.Component {
             
             <div className='container' style={containerStyle}>
             
-              <img src="/img/wow-logo.jpg" style={logoStyle}/>
-              <h1 style={h1Style}>CHARACTER TRACKER</h1> 
+              <img src="/img/wow-logo.png" style={logoStyle}/>
+              <br/>
               <h3 style={h1Style}>EXISTING USER LOGIN</h3>  
               
               <form action="/user/login" method="POST">

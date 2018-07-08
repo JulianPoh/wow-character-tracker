@@ -13,7 +13,7 @@ class Home extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '50%',
+      maxWidth: '30%',
       textAlign: 'center',
     }
 
@@ -38,9 +38,9 @@ class Home extends React.Component {
             
             <div className='container' style={containerStyle}>
             
-              <img src="/img/wow-logo.jpg" style={logoStyle}/>
-              <h1 style={h1Style}>CHARACTER TRACKER</h1>  
-              
+              <img src="/img/wow-logo.png" style={logoStyle}/>
+              <br/>
+              <br/>
               <a href="/user/login"><button style={buttonStyle}>EXISTING USER LOGIN</button></a>
               <a href="/user/new"><button style={buttonStyle}>REGISTER NEW USER</button></a>
 
