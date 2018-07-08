@@ -13,7 +13,7 @@ class Home extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '50%',
+      maxWidth: '70%',
       textAlign: 'center',
     }
 
@@ -23,7 +23,8 @@ class Home extends React.Component {
   
       const buttonStyle = {
       margin: '0 5px',
-      width: '165px'
+      width: '165px',
+      height: '38px'
     }
 
       return(
@@ -40,12 +41,20 @@ class Home extends React.Component {
             
               <img src="/img/wow-logo.jpg" style={logoStyle}/>
               <h1 style={h1Style}>CHARACTER TRACKER</h1>  
-              
-              <a href="/user/login"><button style={buttonStyle}>EXISTING USER LOGIN</button></a>
-              <a href="/user/new"><button style={buttonStyle}>REGISTER NEW USER</button></a>
+            </div>
 
-              <h6>World of Warcraft and its associated images are property of Blizzard Entertainment and are only used here for educational purposes and to tell eveyone how awesome it is.</h6>
+            <div className='container' style={containerStyle}>  
+              <a href="/character/newChar"><button style={buttonStyle}>ADD NEW CHARACTER</button></a>
+              <a href="/character/editChar"><button style={buttonStyle}>EDIT EXISTING CHARACTER</button></a>
+              <a href="/user/logout"><button style={buttonStyle}>CURRENT USER LOGOUT</button></a>
+            </div>
 
+            <div>
+            {this.props.characters.map(characters => (
+              <li key={characters.id}>
+                {characters.name}
+              </li>
+            ))}
             </div>
           
           </body>

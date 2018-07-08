@@ -2,13 +2,47 @@ var React = require("react");
 
 class NewUser extends React.Component {
   render() {
-    // If the user is not logged in, display the login form.
-    // If the user is logged in, display his name, his tasks, and a logout button.
+
+    const bodyStyle = {
+      fontFamily: 'Averia Libre'
+    }
+
+    const containerStyle = {
+      margin: '0 auto',
+      textAlign: 'center',
+    }
+
+    const logoStyle = {
+      maxWidth: '30%',
+      textAlign: 'center'
+    }
+
+    const h1Style = {
+      textAlign: 'center'
+    }    
+  
+      const buttonStyle = {
+      margin: '0 5px',
+      width: '165px'
+    }
+
+
     return (
       <html>
-        <head />
-        <body>
-          <h1>New User Registration</h1>
+        
+        <head>
+          <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
+          <link href="css/style.css"/>
+        </head>
+        
+        <body style={bodyStyle}>
+          
+          <div className='container' style={containerStyle}>
+            
+            <img src="/img/wow-logo.jpg" style={logoStyle}/>
+            <h1 style={h1Style}>CHARACTER TRACKER</h1> 
+            <h2>New User Registration</h2>
+              
             <form method="POST" action="/user/new">
                 Name: <br/>
                 <input name="name" type="text" /><br/>
@@ -28,9 +62,13 @@ class NewUser extends React.Component {
                   <option value="AUNZ">Australia & New Zealand</option>
                 </select><br/>
                 <br/>
-                <input type="submit" value="Sign Up" /><br/>
+                <input type="submit" value="REGISTER" /><br/>
             </form>
+
+          </div>
+
         </body>
+      
       </html>
     );
   }

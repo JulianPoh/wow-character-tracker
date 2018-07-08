@@ -61,6 +61,7 @@ const getHome = (request, response) => {
 };
 
 
+
 //GET USER CREATION FORM
 const newUserForm = (request, response) => {
     response.render('newUser');
@@ -76,17 +77,20 @@ const postNewUser = (request, response) => {
     const values = [userName, userEmail, password, userLoc];
     pool.query(queryText, values, (err, queryResult) => {
         if ( err ){
+            console.log('Error Creating New User.');
             response.send('DB error: '+ err.message)
         }else{
             let user_id = queryResult.rows[0].id;
+            console.log('Creating New User.');
             response.cookie('logged_in', 'true');
             response.cookie('user_id', user_id);
             response.send( "Created New User " + userName )
             // redirect to home page
-            response.redirect('/user');
+            response.redirect('/user/userHome');
         }
     });
 };
+
 
 //GET USER LOGIN FORM
 const userLoginForm = (request, response) => {
@@ -95,30 +99,50 @@ const userLoginForm = (request, response) => {
 
 //USER LOGIN FUNCTION
 const userLogin = (request, response) => {
-    let queryText = 'SELECT * FROM users WHERE email=$1';
-    const values = [request.body.email];
-    pool.query(queryText, values, (err, queryResult) => {
-        if( err ){
-            response.send('DB error: '+ err.message)
-        }else{
-            const queryRows = queryResult.rows;
-            console.log( queryRows );
-
-            if( queryRows.length < 1){
-                response.send(401);
-            }else{
-                let db_pass_hash = queryRows[0].password;
-                let request_pass_hash = sha256( request.body.password );
-                if( db_pass_hash ===  request_pass_hash ){
-                    response.cookie('logged_in', 'true');
-                    response.cookie('user_id', queryRows[0].id);
-                    response.send("Welcome "+queryRows[0].name);
-                }else{
-                    response.status(401).send('Access Denied');
+    let isLoggedIn = request.cookies.logged_in;
+    let currentUserId = request.cookies.user_id;
+    if (isLoggedIn === 'true') {
+      response.render('userHome');
+    } else {
+        let queryText = 'SELECT * FROM users WHERE email=$1';
+        const values = [request.body.email];
+        pool.query(queryText, values, (err, queryResult) => {
+            if ( err ) {
+                response.send('DB error: '+ err.message)
+            } else {
+                const queryRows = queryResult.rows;
+                console.log( queryRows );
+                if ( queryRows.length < 1){
+                    response.send(401);
+                } else {
+                    let db_pass_hash = queryRows[0].password;
+                    let request_pass_hash = sha256( request.body.password );
+                    if ( db_pass_hash ===  request_pass_hash ){
+                        response.cookie('logged_in', 'true');
+                        response.cookie('user_id', queryRows[0].id);
+                        response.redirect('/userHome');
+                    } else {
+                        response.status(401).send('Access Denied');
+                    }
                 }
             }
+        })
+    }
+};
+
+
+//GET USER HOME PAGE
+const userHome = (request, response) => {
+    let currentUserId = request.cookies.user_id;
+    const queryString = 'SELECT * from characters WHERE users_id = $1 ORDER BY characters.name ASC;';
+    pool.query(queryString, (err, result) => {
+        if (err) {
+            console.error('Query error:', err.stack);
+        } else {
+            console.log('Query result:', result);
+            response.render('userhome', {characters: result.rows});
         }
-    });
+    })
 };
 
 
@@ -126,7 +150,7 @@ const userLogin = (request, response) => {
 const userLogout = (req, response) => {
   response.clearCookie('user_id');
   response.clearCookie('logged_in');
-  response.redirect('/users/login');
+  response.redirect('/user/login');
 };
 
 
@@ -160,7 +184,8 @@ const updateUser = (request, response) => {
         } else {
             console.log('Query result:', result);
             // redirect to home page
-            response.redirect('/user/home');
+            response.redirect('/userHome');
+            respond.send('User Details Updated.');
         }
     });
 }
@@ -321,6 +346,7 @@ app.get('/user/new', newUserForm);
 app.post('/user/new', postNewUser);
 app.get('/user/login', userLoginForm);
 app.post('/user/login', userLogin);
+app.get('user/userhome', userHome);
 app.delete('/user/logout', userLogout);
 app.get('/user/:id/edit', editUserForm);
 app.put('/user/:id/edit', updateUser);

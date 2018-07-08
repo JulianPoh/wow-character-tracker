@@ -59,7 +59,7 @@ class NewChar extends React.Component {
                 <input type="submit" value="Create New Character" /><br/>
             </form>
           </div>
-          <script src="/script.js"></script>
+          <script src="/newCharScript.js"></script>
         </body>
       </html>
     );
