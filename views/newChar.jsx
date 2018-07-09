@@ -21,9 +21,13 @@ class NewChar extends React.Component {
       textAlign: 'center'
     }    
   
-      const buttonStyle = {
+    const buttonStyle = {
       margin: '0 5px',
       width: '165px'
+    }
+
+    const formStyle = {
+      fontSize: '12px'
     }
 
     return (
@@ -40,7 +44,7 @@ class NewChar extends React.Component {
             <img src="/img/wow-logo.png" style={logoStyle}/>
             <h2 style={h1Style}>New Character Creation</h2>
 
-            <form method="POST" action="/character/new">
+            <form method="POST" action="/character/new" style={formStyle}>
                 Name: <br/>
                 <input name="name" type="text" placeholder="New Character Name"/><br/>
                 <br/>

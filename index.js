@@ -86,7 +86,6 @@ const postNewUser = (request, response) => {
             console.log('Creating New User.');
             response.cookie('logged_in', 'true');
             response.cookie('user_id', user_id);
-            response.send('New User Created. Redirecting to User Home Page.');
             response.redirect('userHome');
         }
     })
