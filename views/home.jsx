@@ -21,9 +21,13 @@ class Home extends React.Component {
       textAlign: 'center'
     }    
   
-      const buttonStyle = {
+    const buttonStyle = {
       margin: '0 5px',
       width: '165px'
+    }
+
+    const formStyle = {
+      fontSize : '12px'
     }
 
       return(

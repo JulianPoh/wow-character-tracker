@@ -17,8 +17,8 @@ var Alert = require('react-bootstrap/lib/Alert');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cookieParser());
-app.use(flash());
 app.use(express.static('public'));
+
 
 // Set react-views to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
@@ -136,13 +136,6 @@ const userHome = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
     if (isLoggedIn === 'true') {
-        let queryString;
-        let values = [currentUserId];
-        if (request.query.sortby == "name") {
-            queryString = 'SELECT * FROM characters WHERE users_id = $1 ORDER BY characters.name ASC;'
-        } else {
-            queryString = 'SELECT * FROM characters WHERE users_id = $1 ORDER BY characters.id ASC;'
-        }
         db.query(queryString, values, (err, result) => {
         if (err) {
             console.error('query error:', err.stack);
@@ -154,7 +147,7 @@ const userHome = (request, response) => {
             }
         });
     } else {
-        response.redirect('/');
+        response.redirect('login');
     }
 };
 
@@ -166,10 +159,16 @@ const userLogout = (req, response) => {
 };
 
 
+// GET LOGOUT PAGE 
+const getLogout = (req, response) => {
+  response.render('logout');
+};
+
+
 //GET EDIT USER FORM
 const editUserForm = (request, response) => {
-  let userEmail = request.params['email'];
-  const queryString = 'SELECT * FROM users WHERE email = ' + userEmail + ';';
+  let userId = request.cookies.user_id;
+  const queryString = 'SELECT * FROM users WHERE id = ' + userId + ';';
   pool.query(queryString, (err, result) => {
     if (err) {
       console.error('Query error:', err.stack);
@@ -186,9 +185,9 @@ const editUserForm = (request, response) => {
 //SAVE EDITED USER
 const updateUser = (request, response) => {
     let id = request.params['id'];
-    let userDetails = request.body;
+    let params = request.body;
     const queryString = 'UPDATE "users" SET "name"=($2), "email"=($3), "password"=($4), "location"=($5) WHERE "id"=($1)';
-    const values = [userDetails.name, userDetails.img, userDetails.height, userDetails.weight, id];
+    const values = [params.name, params.img, params.height, params.weight, id];
     console.log(queryString);
     pool.query(queryString, values, (err, result) => {
         if (err) {
@@ -197,7 +196,6 @@ const updateUser = (request, response) => {
             console.log('Query result:', result);
             // redirect to home page
             response.render('userHome');
-            respond.send('User Details Updated.');
         }
     });
 }
@@ -359,10 +357,11 @@ app.post('/user/new', postNewUser);
 app.get('/user/login', userLoginForm);
 app.post('/user/login', userLogin);
 app.get('user/userhome', userHome);
+app.get('/logout', getLogout);
 app.delete('/logout', userLogout);
-app.get('/user/:id/edit', editUserForm);
-app.put('/user/:id/edit', updateUser);
-app.delete('/user/:id/edit', deleteUser);
+app.get('/user/edit/:id', editUserForm);
+app.put('/user/edit/:id', updateUser);
+app.delete('/user/edit/:id', deleteUser);
 
 //Character Routes
 app.get('/character/new', getNewCharForm);

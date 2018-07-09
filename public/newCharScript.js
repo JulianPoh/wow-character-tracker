@@ -61,7 +61,7 @@ console.log('Script Loaded');
 //INSERT RACE OPTIONS BASED ON FACTION SELECTION    
 factionSelection.addEventListener('change', function() {
     if (factionSelection.value == "alliance") {
-        pageBody.style.color = "white";
+        pageBody.style.color = "grey";
         pageBody.style.backgroundImage = "URL('/img/alliance-logo.jpg')";
         pageBody.style.backgroundSize = "cover";
         raceSelection.options.length = 0;
@@ -72,7 +72,7 @@ factionSelection.addEventListener('change', function() {
             raceSelection.appendChild(allianceRaceOptions);
         }        
     } else if (factionSelection.value == "horde") {
-        pageBody.style.color = "white";
+        pageBody.style.color = "grey";
         pageBody.style.backgroundImage = "URL('/img/horde-logo.jpg')";
         raceSelection.options.length = 0;
         for (var i=0; i<hordeRaces.length; i++) {

@@ -41,9 +41,9 @@ class Logout extends React.Component {
             
               <img src="/img/wow-logo.png" style={logoStyle}/>
               <br/> 
-            </div>
-
             <h2 style={h1Style}> LOGOUT SUCCESSFUL </h2>
+            <a href="/"><button style={buttonStyle}>RETURN HOME</button></a>              
+            </div>
           
           </body>
         

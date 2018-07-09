@@ -55,7 +55,8 @@ class NewUser extends React.Component {
                 <br/>
                 Location:<br/>
                 <select name="location">
-                  <option selected="selected" value="NACA">North America & Canada</option>
+                  <option selected="selected" value="select">Select Location</option>
+                  <option value="NACA">North America & Canada</option>
                   <option value="SA">South America</option>
                   <option value="EU">Europe</option>
                   <option value="AS">Asia</option>
