@@ -53,31 +53,31 @@ class NewChar extends React.Component {
                 <input name="name" type="text" placeholder="New Character Name"/><br/>
                 <br/>
                 Faction: <br/>
-                <select className="selection" id="select-faction">
+                <select name="faction" className="selection" id="select-faction">
                   <option selected="selected" value="chooseAllegiance">Choose Your Allegiance</option>
-                  <option value="alliance">Alliance</option>
-                  <option value="horde">Horde</option>
+                  <option value="Alliance">Alliance</option>
+                  <option value="Horde">Horde</option>
                 </select><br />
                 <br/>
                 Race: <br/>
-                <select className="selection" id="select-race">
+                <select name="race" className="selection" id="select-race">
                   <option selected="selected" value="chooseRace">Select Race</option>
                 </select><br />
                 <br/>
                 Gender: <br/>
-                <select className="selection" id="select-gender">
+                <select name="gender" className="selection" id="select-gender">
                   <option selected="selected" value="chooseRace">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select><br />
                 <br/>
                 Class: <br/>
-                <select className="selection" id="select-class">
+                <select name="class" className="selection" id="select-class">
                   <option selected="selected" value="chooseClass">Select Class</option>
                 </select><br />
                 <br/>
                 Image: <br/>
-                <input name="img" type="text" placeholder="New Character Image"/><br/>
+                <input name="image" type="text" placeholder="New Character Image"/><br/>
                 <br/>
                 <input type="submit" value="Create New Character" /><br/>
             </form>

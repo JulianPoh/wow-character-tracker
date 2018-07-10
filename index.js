@@ -86,7 +86,7 @@ const postNewUser = (request, response) => {
             console.log('Creating New User.');
             response.cookie('logged_in', 'true');
             response.cookie('user_id', user_id);
-            response.redirect('userHome');
+            response.render('userHome');
         }
     })
 };
@@ -270,8 +270,8 @@ const postNewChar = (request, response) => {
     if (request.cookies['logged_in'] != 'true') {
         response.send("You have to be logged in to create a character.")
     } else { 
-        const queryString = 'INSERT INTO characters(name, allegiance, race, gender, class, image, users_id) VALUES($1, $2, $3, $4, $5, $6, $7);';
-        const values = [params.name, params.allegiance, params.race, params.gender, params.class, params.image, currentUser]; 
+        const queryString = 'INSERT INTO characters(name, faction, race, gender, class, image, users_id) VALUES($1, $2, $3, $4, $5, $6, $7);';
+        const values = [params.name, params.faction, params.race, params.gender, params.class, params.image, currentUser]; 
         pool.query(queryString, values, (err, result) => {
             if (err) {
                 console.log('query error:', err.stack);
@@ -307,8 +307,8 @@ const editCharForm = (request, response) => {
 const updateChar = (request, response) => {
     let id = request.params['id'];
     let char = request.body;
-    const queryString = 'UPDATE "characters" SET "name"=($2), "race"=($3), "height"=($4), "weight"=($5) WHERE "id"=($1)';
-    const values = [char.name, char.img, char.height, char.weight, id];
+    const queryString = 'UPDATE "characters" SET "name"=($2), "faction"=($3), "race"=($4), "gender"=($5), "class"=($6) WHERE = ' + id + ';';
+    const values = [char.name, char.faction, char.race, char.gender, char.class, id];
     console.log(queryString);
     pool.query(queryString, values, (err, result) => {
         if (err) {
@@ -317,7 +317,7 @@ const updateChar = (request, response) => {
           console.log('Query result:', result);
 
           // redirect to home page
-          response.redirect('/');
+          response.render('userHome');
           response.send('Character Updated');
         }
     });
