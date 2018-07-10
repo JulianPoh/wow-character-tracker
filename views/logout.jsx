@@ -24,7 +24,7 @@ class Logout extends React.Component {
       const buttonStyle = {
       margin: '0 5px',
       width: '165px',
-      height: '38px'
+      height: '25px'
     }
 
       return(

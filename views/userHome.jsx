@@ -37,6 +37,9 @@ class Home extends React.Component {
       fontSize: '12px'
     }
 
+
+
+
       return(
         <html>
           
@@ -62,7 +65,16 @@ class Home extends React.Component {
 
             <div className='container'>
               <div>
-
+                <ul>
+                  {this.props.characters.map(character => (
+                    <li key={character.name}>
+                      {character.name}<br/>
+                      {character.faction}<br/>
+                      {character.race}<br/>
+                      {character.class}<br/>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 

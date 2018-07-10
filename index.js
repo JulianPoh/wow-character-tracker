@@ -135,13 +135,20 @@ const userLogin = (request, response) => {
 const userHome = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
-    let queryString = 'SELECT from characters WHERE users_id='+currentUserId+';';
-    if (isLoggedIn === 'true') {
-        response.render('userhome');
+    let queryString = 'SELECT * from characters WHERE users_id='+currentUserId+';';
+    pool.query(queryString, (err, result) => {
+        if (err) {
+      console.error('query error:', err.stack);
     } else {
-        response.render('/');
-    }
-};
+        if (isLoggedIn === 'true') {
+          response.render('userhome', {characters: result.rows});
+        } else {
+          response.render('/');
+        } 
+    } 
+    });
+}
+
 
 // USER LOGOUT FUNCTION 
 const userLogout = (req, response) => {
