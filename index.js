@@ -135,11 +135,12 @@ const userLogin = (request, response) => {
 const userHome = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let id = request.cookies.user_id;
+    //Get all characters created by current user.
     let queryString = 'SELECT * from characters WHERE users_id=' + id + ';';
     pool.query(queryString, (err, result) => {
         if (err) {
       console.error('query error:', err.stack);
-    } else {
+    } else {  
         if (isLoggedIn === 'true') {
           response.render('userhome', {characters: result.rows});
         } else {
@@ -235,22 +236,6 @@ const getChar = (request, response) => {
           console.log('Query result:', result);
           // redirect to home page
           response.render( 'character', {characters: result.rows[0]} );
-        }
-    });
-}
-
-//DISPLAY ALL CHARACTERS OWNED BY USER
-const getUserChar = (request, response) => {
-    // query database for all characters
-    const queryString = 'SELECT * from characters WHERE user_id = ' + user_id + ';';
-    pool.query(queryString, (err, result) => {
-        if (err) {
-          console.error('Query error:', err.stack);
-        } else {
-          console.log('Query result:', result);
-
-          // redirect to user's home page
-          response.render( '/user/home', {characters: result.rows} );
         }
     });
 }
