@@ -102,7 +102,7 @@ const userLogin = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
     if (isLoggedIn === 'true') {
-        response.render('userHome');
+        response.render('userhome');
     } else {
         let queryText = 'SELECT * FROM users WHERE email=$1';
         const values = [request.body.email];
@@ -120,7 +120,7 @@ const userLogin = (request, response) => {
                     if ( db_pass_hash ===  request_pass_hash ){
                         response.cookie('logged_in', 'true');
                         response.cookie('user_id', queryRows[0].id);
-                        response.render('userHome');
+                        response.render('userhome');
                     } else {
                         response.status(401).send('Access Denied');
                     }
@@ -135,19 +135,11 @@ const userLogin = (request, response) => {
 const userHome = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
+    let queryString = 'SELECT from characters WHERE users_id='+currentUserId+';';
     if (isLoggedIn === 'true') {
-        db.query(queryString, values, (err, result) => {
-        if (err) {
-            console.error('query error:', err.stack);
-        } else {
-            console.log(result.rows);
-            let charinfo = result.rows.map( characters => { return {"Name": characters.name, "Race": characters.characters_race, "Class": characters.class, "Faction": characters.faction }; })
-            let context = { charinfo: charinfo, cookies: request.cookies };
-            response.render('userHome', context);
-            }
-        });
+        response.render('userhome');
     } else {
-        response.redirect('login');
+        response.render('/');
     }
 };
 
@@ -195,7 +187,7 @@ const updateUser = (request, response) => {
         } else {
             console.log('Query result:', result);
             // redirect to home page
-            response.render('userHome');
+            response.render('userhome');
         }
     });
 }
@@ -279,7 +271,7 @@ const postNewChar = (request, response) => {
                 console.log('query result:', result);
                 // // redirect to home page
                 // response.redirect('/character/new');
-                response.send('Created Character: ' + params.name);
+                response.render('createdChar');
             }
         });
     }
@@ -356,9 +348,9 @@ app.get('/user/new', newUserForm);
 app.post('/user/new', postNewUser);
 app.get('/user/login', userLoginForm);
 app.post('/user/login', userLogin);
-app.get('user/userhome', userHome);
+app.get('/user/userhome', userHome);
 app.get('/logout', getLogout);
-app.delete('/logout', userLogout);
+app.post('/logout', userLogout);
 app.get('/user/edit/:id', editUserForm);
 app.put('/user/edit/:id', updateUser);
 app.delete('/user/edit/:id', deleteUser);

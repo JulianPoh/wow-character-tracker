@@ -21,10 +21,18 @@ class Home extends React.Component {
       textAlign: 'center'
     }    
   
-      const buttonStyle = {
+    const buttonStyle = {
       margin: '0 5px',
       width: '100px',
       height: '38px',
+      verticalAlign: 'top',
+      fontSize: '12px'
+    }
+
+    const formStyle = {
+      margin: '10 10px',
+      width: '100px',
+      height: '20px',
       verticalAlign: 'top',
       fontSize: '12px'
     }
@@ -47,7 +55,9 @@ class Home extends React.Component {
             <div className='container' style={containerStyle}>  
               <a href="/character/new"><button style={buttonStyle}>ADD NEW CHARACTER</button></a>
               <a href="/user/edit/:id"><button style={buttonStyle}>EDIT USER DETAILS</button></a>
-              <a href="/logout"><button style={buttonStyle}>LOGOUT</button></a>
+              <form action="/logout" method="POST">
+                <button name='logout' type="submit" style={buttonStyle}>LOGOUT</button>
+              </form>
             </div>
 
             <div className='container'>

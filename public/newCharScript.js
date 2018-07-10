@@ -60,7 +60,7 @@ console.log('Script Loaded');
 
 //INSERT RACE OPTIONS BASED ON FACTION SELECTION    
 factionSelection.addEventListener('change', function() {
-    if (factionSelection.value == "alliance") {
+    if (factionSelection.value == "Alliance") {
         pageBody.style.color = "grey";
         pageBody.style.backgroundImage = "URL('/img/alliance-logo.jpg')";
         pageBody.style.backgroundSize = "cover";
@@ -71,7 +71,7 @@ factionSelection.addEventListener('change', function() {
             allianceRaceOptions.text = allianceRaces[i];
             raceSelection.appendChild(allianceRaceOptions);
         }        
-    } else if (factionSelection.value == "horde") {
+    } else if (factionSelection.value == "Horde") {
         pageBody.style.color = "grey";
         pageBody.style.backgroundImage = "URL('/img/horde-logo.jpg')";
         raceSelection.options.length = 0;
@@ -147,7 +147,7 @@ raceSelection.addEventListener('change', function() {
         classSelection.options.length = 0;
         for (var i=0; i<undeadClasses.length; i++) {
             var undeadClassOptions = document.createElement("option");
-            dundeadClassOptions.value = undeadClasses[i];
+            undeadClassOptions.value = undeadClasses[i];
             undeadClassOptions.text = undeadClasses[i];
             classSelection.appendChild(undeadClassOptions);
         }
@@ -191,7 +191,7 @@ raceSelection.addEventListener('change', function() {
             pandarenClassOptions.text = pandarenClasses[i];
             classSelection.appendChild(pandarenClassOptions);
         }
-    }
+    } 
 })
 
 
