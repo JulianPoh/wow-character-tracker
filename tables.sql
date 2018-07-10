@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS characters (
   id SERIAL PRIMARY KEY,
   name varchar(255),
-  allegiance varchar(255),
+  faction varchar(255),
   race varchar(255),
   gender varchar(255),
   class varchar(255),

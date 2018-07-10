@@ -57,7 +57,7 @@ class Home extends React.Component {
             <br/> 
             <div className='container' style={containerStyle}>  
               <a href="/character/new"><button style={buttonStyle}>ADD NEW CHARACTER</button></a>
-              <a href="/user/edit/:id"><button style={buttonStyle}>EDIT USER DETAILS</button></a>
+              <a href="/user/edit"><button style={buttonStyle}>EDIT USER DETAILS</button></a>
               <form action="/logout" method="POST">
                 <button name='logout' type="submit" style={buttonStyle}>LOGOUT</button>
               </form>
@@ -67,8 +67,8 @@ class Home extends React.Component {
               <div>
                 <ul>
                   {this.props.characters.map(character => (
-                    <li key={character.name}>
-                      {character.name}<br/>
+                    <li key={character.id}>
+                      <a href={'/character/' + character.id}>{character.name}</a><br/>
                       {character.faction}<br/>
                       {character.race}<br/>
                       {character.class}<br/>

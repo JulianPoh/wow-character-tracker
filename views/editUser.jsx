@@ -49,17 +49,14 @@ class EditUser extends React.Component {
           
             <img src="/img/wow-logo.png" style={logoStyle}/>
             <br/>
-            <h2>EDITING USER #<span>{this.props.users.id}: {this.props.users.name}</span></h2>
+            <h2>EDITING USER #<span>{this.props.users.id }: {this.props.users.name}</span></h2>
               
-            <form method="PUT" action="/user/new" style={formStyle}>
+            <form method="POST" action={"/user/edit?_method=PUT"} style={formStyle}>
                 <label className="form-label" style={labelStyle}>Change Name: </label><br/>
                 <input name="name" type="text" defaultValue={this.props.users.name}/><br/>
                 <br/>
                 <label className="form-label">Change Email: </label><br/>
                 <input name="email" type="email" defaultValue={this.props.users.email}/><br/>
-                <br/>
-                <label className="form-label">Change Password: </label><br/>
-                <input name="password" type="password" defaultValue={this.props.users.password}/><br/>
                 <br/>
                 <label className="form-label">Change Location: </label><br/>
                 <select name="location">

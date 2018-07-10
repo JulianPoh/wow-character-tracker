@@ -134,8 +134,8 @@ const userLogin = (request, response) => {
 //GET USER HOME PAGE
 const userHome = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
-    let currentUserId = request.cookies.user_id;
-    let queryString = 'SELECT * from characters WHERE users_id='+currentUserId+';';
+    let id = request.cookies.user_id;
+    let queryString = 'SELECT * from characters WHERE users_id=' + id + ';';
     pool.query(queryString, (err, result) => {
         if (err) {
       console.error('query error:', err.stack);
@@ -166,8 +166,8 @@ const getLogout = (req, response) => {
 
 //GET EDIT USER FORM
 const editUserForm = (request, response) => {
-  let userId = request.cookies.user_id;
-  const queryString = 'SELECT * FROM users WHERE id = ' + userId + ';';
+  let id = request.cookies.user_id;
+  const queryString = 'SELECT * FROM users WHERE id = ' + id + ';';
   pool.query(queryString, (err, result) => {
     if (err) {
       console.error('Query error:', err.stack);
@@ -183,10 +183,10 @@ const editUserForm = (request, response) => {
 
 //SAVE EDITED USER
 const updateUser = (request, response) => {
-    let id = request.params['id'];
+    let id = request.cookies.user_id;
     let params = request.body;
-    const queryString = 'UPDATE "users" SET "name"=($2), "email"=($3), "password"=($4), "location"=($5) WHERE "id"=($1)';
-    const values = [params.name, params.img, params.height, params.weight, id];
+    const queryString = 'UPDATE "users" SET "name"=($1), "email"=($2), "location"=($3) WHERE id = ' + id + ';'
+    const values = [params.name, params.email, params.location];
     console.log(queryString);
     pool.query(queryString, values, (err, result) => {
         if (err) {
@@ -194,7 +194,7 @@ const updateUser = (request, response) => {
         } else {
             console.log('Query result:', result);
             // redirect to home page
-            response.render('userhome');
+            response.render('editedUser');
         }
     });
 }
@@ -202,8 +202,8 @@ const updateUser = (request, response) => {
 
 //DELETE USER
 const deleteUser = (request, response) => {
-    let userId = parseInt(request.params.id)
-    const queryString = 'DELETE from users WHERE id = $1';
+    let id = request.cookies.user_id;
+    const queryString = 'DELETE from users WHERE id =' + id + ';';
     let values = [userId];
     pool.query(queryString, values, (err, queryResult) => {
         if (err) {
@@ -224,10 +224,10 @@ const deleteUser = (request, response) => {
 <<============================================================================>>
 <<============================================================================>>
 */
-//FIND CHARACTER BY NAME
+//FIND CHARACTER BY ID
 const getChar = (request, response) => {
-    let charName = request.params['name'];
-    const queryString = 'SELECT * FROM characters WHERE name = ' + charName + ';';
+    let id = request.params['id'];
+    const queryString = 'SELECT * FROM characters WHERE id = $1';
     pool.query(queryString, (err, result) => {
         if (err) {
           console.error('Query error:', err.stack);
@@ -358,9 +358,9 @@ app.post('/user/login', userLogin);
 app.get('/user/userhome', userHome);
 app.get('/logout', getLogout);
 app.post('/logout', userLogout);
-app.get('/user/edit/:id', editUserForm);
-app.put('/user/edit/:id', updateUser);
-app.delete('/user/edit/:id', deleteUser);
+app.get('/user/edit', editUserForm);
+app.put('/user/edit', updateUser);
+app.delete('/user/delete', deleteUser);
 
 //Character Routes
 app.get('/character/new', getNewCharForm);
