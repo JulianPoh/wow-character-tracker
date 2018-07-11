@@ -195,6 +195,3 @@ raceSelection.addEventListener('change', function() {
 })
 
 
-
-
-

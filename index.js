@@ -229,13 +229,14 @@ const deleteUser = (request, response) => {
 const getChar = (request, response) => {
     let id = request.params['id'];
     const queryString = 'SELECT * FROM characters WHERE id = $1';
-    pool.query(queryString, (err, result) => {
+    let values = [id];
+    pool.query(queryString, values, (err, result) => {
         if (err) {
           console.error('Query error:', err.stack);
         } else {
           console.log('Query result:', result);
           // redirect to home page
-          response.render( 'character', {characters: result.rows[0]} );
+          response.render( 'charView', {characters: result.rows[0]} );
         }
     });
 }
@@ -273,8 +274,9 @@ const postNewChar = (request, response) => {
 //GET EDIT CHARACTER FORM
 const editCharForm = (request, response) => {
     let id = request.params['id'];
-    const queryString = 'SELECT * FROM characters WHERE id = ' + id + ';';
-    pool.query(queryString, (err, result) => {
+    const queryString = 'SELECT * FROM characters WHERE id = $1'
+    let values = [id];
+    pool.query(queryString, values, (err, result) => {
         if (err) {
           console.error('Query error:', err.stack);
         } else {
@@ -291,8 +293,8 @@ const editCharForm = (request, response) => {
 const updateChar = (request, response) => {
     let id = request.params['id'];
     let char = request.body;
-    const queryString = 'UPDATE "characters" SET "name"=($2), "faction"=($3), "race"=($4), "gender"=($5), "class"=($6) WHERE = ' + id + ';';
-    const values = [char.name, char.faction, char.race, char.gender, char.class, id];
+    const queryString = 'UPDATE "characters" SET "name"=($2), "faction"=($3), "race"=($4), "gender"=($5), "class"=($6) WHERE id = $1'
+    const values = [id, char.name, char.faction, char.race, char.gender, char.class];
     console.log(queryString);
     pool.query(queryString, values, (err, result) => {
         if (err) {
@@ -301,8 +303,7 @@ const updateChar = (request, response) => {
           console.log('Query result:', result);
 
           // redirect to home page
-          response.render('userHome');
-          response.send('Character Updated');
+          response.render('editedChar');
         }
     });
 }
@@ -353,7 +354,7 @@ app.post('/character/new', postNewChar);
 app.get('/character/:id', getChar);
 app.get('/character/:id/edit', editCharForm);
 app.put('/character/:id/edit', updateChar);
-app.delete('/character/:id', deleteChar);
+app.delete('/character/:id/delete', deleteChar);
 
 
 app.listen(3000, () => {

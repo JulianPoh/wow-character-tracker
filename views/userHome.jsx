@@ -69,9 +69,7 @@ class Home extends React.Component {
                   {this.props.characters.map(character => (
                     <li key={character.id}>
                       <a href={'/character/' + character.id}>{character.name}</a><br/>
-                      {character.faction}<br/>
-                      {character.race}<br/>
-                      {character.class}<br/>
+                      <p>{character.race} {character.class} ({character.faction})</p><br/>
                     </li>
                   ))}
                 </ul>
