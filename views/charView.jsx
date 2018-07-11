@@ -51,31 +51,31 @@ class Character extends React.Component {
             <div className='container' style={containerStyle}>
             
               <img src="/img/wow-logo.png" style={logoStyle}/>
-            </div>
-          <div>
-            <img src={this.props.characters.image}/>
-            <ul className="characters-list">
-              <li className="characters-attribute">
-                ID: {this.props.characters.id}
-              </li>
-              <li className="characters-attribute">
-                Name: {this.props.characters.name}
-              </li>
-              <li className="characters-attribute">
-                Faction: {this.props.characters.faction}
-              </li>
-              <li className="characters-attribute">
-                Race: {this.props.characters.race}
-              </li>
-              <li className="characters-attribute">
-                Gender: {this.props.characters.gender}
-              </li>
-              <li className="characters-attribute">
-                Class: {this.props.characters.class}
-              </li>
-            </ul>
+            
+              <img src={this.props.characters.image}/>
+                <p className="characters-attribute">
+                  ID: {this.props.characters.id}
+                </p>
+                <p className="characters-attribute">
+                  Name: {this.props.characters.name}
+                </p>
+                <p className="characters-attribute">
+                  Faction: {this.props.characters.faction}
+                </p>
+                <p className="characters-attribute">
+                  Race: {this.props.characters.race}
+                </p>
+                <p className="characters-attribute">
+                  Gender: {this.props.characters.gender}
+                </p>
+                <p className="characters-attribute">
+                  Class: {this.props.characters.class}
+                </p>
+
+
             <a href={'/character/' + this.props.characters.id + '/edit'}><button style={buttonStyle}>EDIT CHARACTER</button></a>
             <a href={'/character/' + this.props.characters.id + '/delete'}><button style={buttonStyle}>DELETE CHARACTER</button></a>
+
           </div>
         </body>
       </html>

@@ -38,9 +38,7 @@ class Home extends React.Component {
     }
 
 
-
-
-      return(
+    return(
         <html>
           
           <head>
@@ -53,30 +51,28 @@ class Home extends React.Component {
             <div className='container' style={containerStyle}>
             
               <img src="/img/wow-logo.png" style={logoStyle}/>
-            </div>
-            <br/> 
-            <div className='container' style={containerStyle}>  
-              <a href="/character/new"><button style={buttonStyle}>ADD NEW CHARACTER</button></a>
-              <a href="/user/edit"><button style={buttonStyle}>EDIT USER DETAILS</button></a>
-              <form action="/logout" method="POST">
-                <button name='logout' type="submit" style={buttonStyle}>LOGOUT</button>
-              </form>
-            </div>
+              <br/> 
+              <div className='btn-container'>  
+                <a href="/character/new"><button style={buttonStyle}>ADD NEW CHARACTER</button></a>
+                <a href="/user/edit"><button style={buttonStyle}>EDIT USER DETAILS</button></a>
+                <form action="/logout" method="POST">
+                  <button name='logout' type="submit" style={buttonStyle}>LOGOUT</button>
+                </form>
+              </div>
 
-            <div className='container'>
-              <div>
-                <ul>
-                  {this.props.characters.map(character => (
-                    <li key={character.id}>
-                      <a href={'/character/' + character.id}>{character.name}</a><br/>
-                      <p>{character.race} {character.class} ({character.faction})</p><br/>
-                    </li>
-                  ))}
-                </ul>
+              <div className='char-container'>
+                <div>
+                  <ul>
+                    {this.props.characters.map(character => (
+                      <p key={character.id}>
+                        <a href={'/character/' + character.id}>{character.name}</a><br/>
+                        <p>{character.race} {character.class} ({character.faction})</p><br/>
+                      </p>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-
-          
           </body>
         
         </html>

@@ -120,7 +120,7 @@ const userLogin = (request, response) => {
                     if ( db_pass_hash ===  request_pass_hash ){
                         response.cookie('logged_in', 'true');
                         response.cookie('user_id', queryRows[0].id);
-                        response.render('userhome');
+                        response.redirect('/user/userhome');
                     } else {
                         response.status(401).send('Access Denied');
                     }
