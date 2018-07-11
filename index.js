@@ -102,7 +102,7 @@ const userLogin = (request, response) => {
     let isLoggedIn = request.cookies.logged_in;
     let currentUserId = request.cookies.user_id;
     if (isLoggedIn === 'true') {
-        response.render('userhome');
+        response.redirect('/user/userhome');
     } else {
         let queryText = 'SELECT * FROM users WHERE email=$1';
         const values = [request.body.email];
