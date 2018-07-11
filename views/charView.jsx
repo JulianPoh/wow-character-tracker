@@ -73,6 +73,7 @@ class Character extends React.Component {
                 </p>
 
 
+            <a href={'/user/userhome'}><button style={buttonStyle}>BACK TO HOME</button></a>
             <a href={'/character/' + this.props.characters.id + '/edit'}><button style={buttonStyle}>EDIT CHARACTER</button></a>
             <a href={'/character/' + this.props.characters.id + '/delete'}><button style={buttonStyle}>DELETE CHARACTER</button></a>
 
