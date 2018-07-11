@@ -50,6 +50,12 @@ class NewChar extends React.Component {
       color: 'black'
     }
 
+    const wrapper = {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridGap: '10px'
+    }
+
     return (
       <html>
           <head>
@@ -62,41 +68,53 @@ class NewChar extends React.Component {
             
             <img src="/img/wow-logo.png" style={logoStyle}/>
             <h2 style={h1Style}>New Character Creation</h2>
-
-            <form method="POST" action="/character/new" style={formStyle}>
-                Name: <br/>
-                <input name="name" type="text" placeholder="New Character Name"/><br/>
-                <br/>
-                Faction: <br/>
-                <select name="faction" className="selection" id="select-faction">
-                  <option selected="selected" value="chooseAllegiance">Choose Your Allegiance</option>
-                  <option value="Alliance">Alliance</option>
-                  <option value="Horde">Horde</option>
-                </select><br />
-                <br/>
-                Race: <br/>
-                <select name="race" className="selection" id="select-race">
-                  <option selected="selected" value="chooseRace">Select Race</option>
-                </select><br />
-                <br/>
-                Gender: <br/>
-                <select name="gender" className="selection" id="select-gender">
-                  <option selected="selected" value="chooseRace">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select><br />
-                <br/>
-                Class: <br/>
-                <select name="class" className="selection" id="select-class">
-                  <option selected="selected" value="chooseClass">Select Class</option>
-                </select><br />
-                <br/>
-                Image: <br/>
-                <input name="image" type="text" placeholder="New Character Image"/><br/>
-                <br/>
-                <button type="submit" value="Create New Character" style={buttonStyle}>CREATE NEW CHARACTER</button><br/>
-            </form>
             
+            <div className='char-container' style={wrapper}>
+
+              <div id='info-window'>
+                <p id='info-text'></p>
+              </div>
+
+              <div>
+                <form method="POST" action="/character/new" style={formStyle}>
+                    Name: <br/>
+                    <input name="name" type="text" placeholder="New Character Name"/><br/>
+                    <br/>
+                    Faction: <br/>
+                    <select name="faction" className="selection" id="select-faction">
+                      <option selected="selected" value="chooseAllegiance">Choose Your Allegiance</option>
+                      <option value="Alliance">Alliance</option>
+                      <option value="Horde">Horde</option>
+                    </select><br />
+                    <br/>
+                    Race: <br/>
+                    <select name="race" className="selection" id="select-race">
+                      <option selected="selected" value="chooseRace">Select Race</option>
+                    </select><br />
+                    <br/>
+                    Gender: <br/>
+                    <select name="gender" className="selection" id="select-gender">
+                      <option selected="selected" value="chooseRace">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select><br />
+                    <br/>
+                    Class: <br/>
+                    <select name="class" className="selection" id="select-class">
+                      <option selected="selected" value="chooseClass">Select Class</option>
+                    </select><br />
+                    <br/>
+                    Image: <br/>
+                    <input name="image" type="text" placeholder="New Character Image"/><br/>
+                    <br/>
+                    <button type="submit" value="Create New Character" style={buttonStyle}>CREATE NEW CHARACTER</button><br/>
+                </form>
+              </div>
+
+              <div>
+              </div>
+
+            </div>
           </div>
           
           <script src="/newCharScript.js"></script>

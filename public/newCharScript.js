@@ -1,6 +1,6 @@
 //RACES BY FACTIONS
-const allianceRaces = ["Select Race", "Draenei", "Dwarf", "Gnome", "Human", "Night Elf", "Pandarian", "Worgen"];
-const hordeRaces    = ["Select Race", "Blood Elf", "Goblin", "Orc", "Pandarian", "Tauren", "Troll", "Undead"];
+const allianceRaces = ["Select Race", "Draenei", "Dwarf", "Gnome", "Human", "Night Elf", "Pandaren", "Worgen"];
+const hordeRaces    = ["Select Race", "Blood Elf", "Goblin", "Orc", "Pandaren", "Tauren", "Troll", "Undead"];
 
 
 //CLASS OPTIONS BY RACE
@@ -16,7 +16,7 @@ const bElfClasses       = ["Select Class", "Warrior", "Hunter", "Paladin", "Rogu
 const goblinClasses     = ["Select Class", "Warrior", "Hunter", "Rogue", "Priest", "Death Knight", "Shaman", "Mage", "Warlock"];
 const trollClasses      = ["Select Class", "Warrior", "Hunter", "Rogue", "Priest", "Death Knight", "Shaman", "Mage", "Warlock", "Monk", "Druid"];
 const taurenClasses     = ["Select Class", "Warrior", "Hunter", "Paladin", "Priest", "Death Knight", "Shaman", "Monk", "Druid"];
-const pandarianClasses  = ["Select Class", "Warrior", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Monk"];
+const pandarenClasses  = ["Select Class", "Warrior", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Monk"];
 
 
 //RACIAL DESCRIPTIONS
@@ -25,7 +25,7 @@ const dwarfDesc     = "The dwarves are a hardy race, hailing from Khaz Modan in 
 const gnomeDesc     = "The gnomes are a quirky race, obsessed with gadgets and technology. They originally come from the city of New Tinkertown, which was destroyed by High Tinker Mekkatorque in an attempt to save it from an invading army of troggs.";
 const humanDesc     = "The humans are the most populous and the youngest race in Azeroth. The humans have become the de facto leaders of the Alliance, with their youthful ambitions and resilience. The humans are the founders of the Alliance. Their diplomacy skills go back to the Second War, where the seven kingdoms joined together to defeat the Horde. ";
 const nelfDesc      = "The night elves are a mysterious race whose thirst for magic and power created a flourishing, yet corrupt, ancient empire. This empire had a dark side, drawing the attention of the Burning Legion which led to the War of the Ancients and The Sundering, a massive arcane explosion that ripped the world apart. The new generation of night elves shunned arcane magic and instead rebuilt their civilization to live in harmony with nature. They lived in Kalimdor for thousands of years, undisturbed until the world tree and their immortality was sacrificed to halt a new advance of the Burning Legion prior to the events of World of Warcraft.";
-const pandarianDesc = "Denizens of a wondrous and fertile land, the pandaren once labored under the oppressive thumb of a monstrous race of ancient warlords known as the Mogu. Through tenacity, diplomacy, and a unique form of unarmed combat, the pandaren staged a successful revolution that deposed the Mogu and established a pandaren empire that would prosper for thousands of years.";
+const pandarenDesc = "Denizens of a wondrous and fertile land, the pandaren once labored under the oppressive thumb of a monstrous race of ancient warlords known as the Mogu. Through tenacity, diplomacy, and a unique form of unarmed combat, the pandaren staged a successful revolution that deposed the Mogu and established a pandaren empire that would prosper for thousands of years.";
 const worgenDesc    = "The Worgen are a cursed race comprised of the people of Gilneas who have been afflicted by an ancient druidic curse, causing them to transform into deadly half-worg half-men. After many attempts at developing a cure, the infected people of Gilneas have managed to keep their mind and consciousness and have been sworn into the Alliance to battle the Forsaken threat that ravages their land.";
 const belfDesc      = "The blood elves are a proud, haughty race, joining the Horde in Burning Crusade. They represent a faction of former high elves, split off from the rest of elven society; they are also survivors of Arthas' assault on Silvermoon. Blood elves are fully dependent on magic, having revelled in its power for so long that they suffer horrible withdrawal if it were to be taken away.";
 const goblinDesc    = "After series of cataclysmic events in the Lost Isles and the Undermine, a betrayal from one of their own trade princes, and open hostility from members of the Alliance, the goblins of the Bilgewater Cartel decide that their relations with the Horde can no longer be neutral. Through the orcs, the goblins enter the Horde, becoming the 6th race to follow the Warchief's leadership.";
@@ -53,6 +53,7 @@ const warriorDesc   = "Weapon masters, bloodthirsty berserkers, and defenders of
 const factionSelection = document.getElementById("select-faction");
 const raceSelection = document.getElementById("select-race");
 const classSelection = document.getElementById("select-class");
+const infoText = document.getElementById("info-text");
 const pageBody = document.body;
 
 
@@ -88,6 +89,8 @@ factionSelection.addEventListener('change', function() {
 //INSERT CLASS OPTIONS BASED ON RACE SELECTION    
 raceSelection.addEventListener('change', function() {
     if (raceSelection.value == "Human") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = humanDesc;
         classSelection.options.length = 0;
         for (var i=0; i<humanClasses.length; i++) {
             var humanClassOptions = document.createElement("option");
@@ -96,6 +99,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(humanClassOptions);
         }        
     } else if (raceSelection.value == "Dwarf") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = dwarfDesc;
         classSelection.options.length = 0;
         for (var i=0; i<dwarfClasses.length; i++) {
             var dwarfClassOptions = document.createElement("option");
@@ -104,6 +109,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(dwarfClassOptions);
         }
     } else if (raceSelection.value == "Night Elf") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = nelfDesc;
         classSelection.options.length = 0;
         for (var i=0; i<nElfClasses.length; i++) {
             var nElfClassOptions = document.createElement("option");
@@ -112,6 +119,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(nElfClassOptions);
         }
     } else if (raceSelection.value == "Gnome") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = gnomeDesc;
         classSelection.options.length = 0;
         for (var i=0; i<gnomeClasses.length; i++) {
             var gnomeClassOptions = document.createElement("option");
@@ -120,6 +129,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(gnomeClassOptions);
         }
     } else if (raceSelection.value == "Draenei") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = draeneiDesc;
         classSelection.options.length = 0;
         for (var i=0; i<draeneiClasses.length; i++) {
             var draeneiClassOptions = document.createElement("option");
@@ -128,6 +139,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(draeneiClassOptions);
         }
     } else if (raceSelection.value == "Worgen") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = worgenDesc;
         classSelection.options.length = 0;
         for (var i=0; i<worgenClasses.length; i++) {
             var worgenClassOptions = document.createElement("option");
@@ -136,6 +149,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(worgenClassOptions);
         }
     } else if (raceSelection.value == "Orc") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = orcDesc;
         classSelection.options.length = 0;
         for (var i=0; i<orcClasses.length; i++) {
             var orcClassOptions = document.createElement("option");
@@ -144,6 +159,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(orcClassOptions);
         }
     } else if (raceSelection.value == "Undead") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = undeadDesc;
         classSelection.options.length = 0;
         for (var i=0; i<undeadClasses.length; i++) {
             var undeadClassOptions = document.createElement("option");
@@ -152,6 +169,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(undeadClassOptions);
         }
     } else if (raceSelection.value == "Blood Elf") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = belfDesc;
         classSelection.options.length = 0;
         for (var i=0; i<bElfClasses.length; i++) {
             var bElfClassOptions = document.createElement("option");
@@ -160,6 +179,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(bElfClassOptions);
         }
     } else if (raceSelection.value == "Goblin") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = goblinDesc;
         classSelection.options.length = 0;
         for (var i=0; i<goblinClasses.length; i++) {
             var goblinClassOptions = document.createElement("option");
@@ -168,6 +189,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(goblinClassOptions);
         }
     } else if (raceSelection.value == "Troll") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = trollDesc;
         classSelection.options.length = 0;
         for (var i=0; i<trollClasses.length; i++) {
             var trollClassOptions = document.createElement("option");
@@ -176,6 +199,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(trollClassOptions);
         }
     } else if (raceSelection.value == "Tauren") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = taurenDesc;
         classSelection.options.length = 0;
         for (var i=0; i<taurenClasses.length; i++) {
             var taurenClassOptions = document.createElement("option");
@@ -184,6 +209,8 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(taurenClassOptions);
         }
     } else if (raceSelection.value == "Pandaren") {
+        infoText.innerHTML = "";
+        infoText.innerHTML = pandarenDesc;
         classSelection.options.length = 0;
         for (var i=0; i<pandarenClasses.length; i++) {
             var pandarenClassOptions = document.createElement("option");
@@ -193,5 +220,3 @@ raceSelection.addEventListener('change', function() {
         }
     } 
 })
-
-
