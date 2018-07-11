@@ -4,7 +4,12 @@ class Login extends React.Component {
   render() {
   
     const bodyStyle = {
-      fontFamily: 'Averia Libre'
+      fontFamily: 'Averia Libre',
+      verticalAlign: 'center',
+      backgroundImage: "URL('/img/wow1.jpg')",
+      backgroundSize: 'cover',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
 
     const containerStyle = {
@@ -13,13 +18,30 @@ class Login extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '30%',
+      maxWidth: '20%',
       textAlign: 'center',
     }
 
     const h1Style = {
       textAlign: 'center'
-    } 
+    }    
+  
+    const buttonStyle = {
+      fontFamily: 'Averia Libre',
+      color: 'gold',
+      textShadow: '0 0 5px black',
+      margin: '0 5px',
+      width: '165px',
+      height: '50px',
+      fontWeight: 'bold',
+      backgroundImage: "URL('/img/flames.gif')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center bottom'
+    }
+
+    const formStyle = {
+      fontSize : '12px'
+    }
 
     
       return(
@@ -27,7 +49,6 @@ class Login extends React.Component {
           
           <head>
           <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
           <link rel="stylesheet" type="text/css" href="css/style.css"/>
           </head>
           
@@ -46,7 +67,7 @@ class Login extends React.Component {
                 Password:<br/> 
                 <input name="password" type="password"/><br/>
                 <br/>
-                <input type="submit" value="Login"/><br/>
+                <button type="submit" value="Login" style={buttonStyle}>LOGIN</button><br/>
               </form>
 
             </div>

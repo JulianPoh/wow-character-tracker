@@ -2,8 +2,15 @@ var React = require("react");
 
 class Character extends React.Component {
   render() {
+
     const bodyStyle = {
-      fontFamily: 'Averia Libre'
+      fontFamily: 'Averia Libre',
+      textDecoration: 'none',
+      verticalAlign: 'center',
+      backgroundImage: "URL('/img/slate.jpg')",
+      backgroundSize: 'cover',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
 
     const containerStyle = {
@@ -12,7 +19,7 @@ class Character extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '30%',
+      maxWidth: '20%',
       textAlign: 'center',
     }
 
@@ -22,11 +29,16 @@ class Character extends React.Component {
   
     const buttonStyle = {
       margin: '0 5px',
-      width: '100px',
-      height: '38px',
+      width: '165px',
+      height: '50px',
       verticalAlign: 'top',
-      fontSize: '12px'
+      backgroundImage: "URL('/img/wormhole.gif')",
+      backgroundSize: 'stretch',
+      fontSize: '12px',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
+
 
     const formStyle = {
       margin: '10 10px',
@@ -49,6 +61,8 @@ class Character extends React.Component {
       verticalAlign: 'top',
       padding: '20px'
     }
+
+
 
       return(
         <html>

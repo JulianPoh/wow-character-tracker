@@ -2,8 +2,14 @@ var React = require("react");
 
 class EditChar extends React.Component {
   render() {
+
     const bodyStyle = {
-      fontFamily: 'Averia Libre'
+      fontFamily: 'Averia Libre',
+      verticalAlign: 'center',
+      backgroundImage: "URL('/img/wow2.jpg')",
+      backgroundSize: 'stretch',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
 
     const containerStyle = {
@@ -12,7 +18,7 @@ class EditChar extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '30%',
+      maxWidth: '20%',
       textAlign: 'center'
     }
 
@@ -20,13 +26,22 @@ class EditChar extends React.Component {
       textAlign: 'center'
     }    
   
-      const buttonStyle = {
+    const buttonStyle = {
+      fontFamily: 'Averia Libre',
+      color: 'gold',
+      textShadow: '0 0 5px black',
       margin: '0 5px',
-      width: '165px'
+      width: '165px',
+      height: '50px',
+      fontWeight: 'bold',
+      backgroundImage: "URL('/img/mist.gif')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center bottom'
     }
 
     const formStyle = {
-      fontSize: '12px'
+      fontSize: '12px',
+      margin: '5px'
     }
 
     const labelStyle = {
@@ -39,7 +54,6 @@ class EditChar extends React.Component {
         
         <head>
           <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
           <link rel="stylesheet" type="text/css" href="css/style.css"/>
         </head>
         
@@ -51,7 +65,7 @@ class EditChar extends React.Component {
             <br/>
             <h2>EDITING CHARACTER : <span>{this.props.characters.name}</span></h2>
 
-            <form className="editChar-form" method="POST" action={"/character/" + this.props.characters.id + "/edit?_method=PUT"}>
+            <form className="editChar-form" method="POST" action={"/character/" + this.props.characters.id + "/edit?_method=PUT"} style={formStyle}>
 
               <div className="char-attribute">
                 Character ID: {this.props.characters.id}

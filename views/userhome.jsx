@@ -4,7 +4,13 @@ class Home extends React.Component {
   render() {
   
     const bodyStyle = {
-      fontFamily: 'Averia Libre'
+      fontFamily: 'Averia Libre',
+      textDecoration: 'none',
+      verticalAlign: 'center',
+      backgroundImage: "URL('/img/slate.jpg')",
+      backgroundSize: 'cover',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
 
     const containerStyle = {
@@ -13,7 +19,7 @@ class Home extends React.Component {
     }
 
     const logoStyle = {
-      maxWidth: '30%',
+      maxWidth: '20%',
       textAlign: 'center',
     }
 
@@ -23,10 +29,14 @@ class Home extends React.Component {
   
     const buttonStyle = {
       margin: '0 5px',
-      width: '100px',
-      height: '38px',
+      width: '165px',
+      height: '50px',
       verticalAlign: 'top',
-      fontSize: '12px'
+      backgroundImage: "URL('/img/wormhole.gif')",
+      backgroundSize: 'stretch',
+      fontSize: '12px',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
 
     const formStyle = {
@@ -43,7 +53,6 @@ class Home extends React.Component {
       gridGap: '10px'
     }
 
-
     const charImgStyle = {
       height: '200px',
       width: 'auto'
@@ -54,7 +63,6 @@ class Home extends React.Component {
           
           <head>
           <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
           <link rel="stylesheet" type="text/css" href="css/style.css"/>
           </head>
           
@@ -80,7 +88,7 @@ class Home extends React.Component {
                       <div>
                       <p key={character.id}>
                         <a href={'/character/' + character.id}><img src={character.image} style={charImgStyle}/></a><br/>
-                        <a href={'/character/' + character.id}><h3>{character.name}</h3></a>
+                        <p><h3>{character.name}</h3></p>
                         <p>{character.race} {character.class} ({character.faction})</p><br/>
                       </p>
                       </div>

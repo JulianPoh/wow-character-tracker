@@ -4,7 +4,12 @@ class Home extends React.Component {
   render() {
   
     const bodyStyle = {
-      fontFamily: 'Averia Libre'
+      fontFamily: 'Averia Libre',
+      verticalAlign: 'center',
+      backgroundImage: "URL('/img/wow1.jpg')",
+      backgroundSize: 'cover',
+      color: 'gold',
+      textShadow: '0 0 5px black'
     }
 
     const containerStyle = {
@@ -22,12 +27,24 @@ class Home extends React.Component {
     }    
   
     const buttonStyle = {
+      fontFamily: 'Averia Libre',
+      color: 'gold',
+      textShadow: '0 0 5px black',
       margin: '0 5px',
-      width: '165px'
+      width: '165px',
+      height: '50px',
+      fontWeight: 'bold',
+      backgroundImage: "URL('/img/flames.gif')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center bottom'
     }
 
     const formStyle = {
       fontSize : '12px'
+    }
+
+    const emptyStyle = {
+      height: '120px'
     }
 
       return(
@@ -35,12 +52,11 @@ class Home extends React.Component {
           
           <head>
           <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
           <link rel="stylesheet" type="text/css" href="css/style.css"/>
           </head>
           
           <body style={bodyStyle}>
-            
+            <div className='container' style={emptyStyle}></div>
             <div className='container' style={containerStyle}>
             
               <img src="/img/wow-logo.png" style={logoStyle}/>
@@ -49,7 +65,9 @@ class Home extends React.Component {
               <a href="/user/login"><button style={buttonStyle}>EXISTING USER LOGIN</button></a>
               <a href="/user/new"><button style={buttonStyle}>REGISTER NEW USER</button></a>
 
-              <h6>World of Warcraft and its associated images are property of Blizzard Entertainment and are only used here for educational purposes and to tell eveyone how awesome it is.</h6>
+            <div className='container' style={emptyStyle}></div>
+            
+            <h6>World of Warcraft and its associated images are property of Blizzard Entertainment and are only used here for educational purposes and to tell eveyone how awesome it is.</h6>
 
             </div>
           
