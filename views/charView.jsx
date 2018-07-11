@@ -37,22 +37,35 @@ class Character extends React.Component {
     }
 
 
+    const charImgStyle = {
+      height: '300px',
+      width: 'auto'
+    }
+
+
+    const rowStyle = {
+      display: 'inline-block',
+      textAlign: 'left',
+      verticalAlign: 'top',
+      padding: '20px'
+    }
 
       return(
         <html>
           
           <head>
           <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet"/>
-          <link href="css/style.css"/>
+          <link rel="stylesheet" type="text/css" href="css/style.css"/>
           </head>
           
           <body style={bodyStyle}>
             
             <div className='container' style={containerStyle}>
             
-              <img src="/img/wow-logo.png" style={logoStyle}/>
+              <img src="/img/wow-logo.png" style={logoStyle}/> <br/>
             
-              <img src={this.props.characters.image}/>
+            <div className='row'>
+              <div style={rowStyle}>
                 <p className="characters-attribute">
                   ID: {this.props.characters.id}
                 </p>
@@ -71,7 +84,11 @@ class Character extends React.Component {
                 <p className="characters-attribute">
                   Class: {this.props.characters.class}
                 </p>
-
+              </div>
+              <div style={rowStyle}>
+              <img src={this.props.characters.image} style={charImgStyle}/>
+              </div>              
+            </div>
 
             <a href={'/user/userhome'}><button style={buttonStyle}>BACK TO HOME</button></a>
             <a href={'/character/' + this.props.characters.id + '/edit'}><button style={buttonStyle}>EDIT CHARACTER</button></a>

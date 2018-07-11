@@ -293,8 +293,8 @@ const editCharForm = (request, response) => {
 const updateChar = (request, response) => {
     let id = request.params['id'];
     let char = request.body;
-    const queryString = 'UPDATE "characters" SET "name"=($2), "faction"=($3), "race"=($4), "gender"=($5), "class"=($6) WHERE id = $1'
-    const values = [id, char.name, char.faction, char.race, char.gender, char.class];
+    const queryString = 'UPDATE "characters" SET "name"=($2), "faction"=($3), "race"=($4), "gender"=($5), "class"=($6), "image"=($7) WHERE id = $1'
+    const values = [id, char.name, char.faction, char.race, char.gender, char.class, char.image];
     console.log(queryString);
     pool.query(queryString, values, (err, result) => {
         if (err) {
