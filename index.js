@@ -309,18 +309,34 @@ const updateChar = (request, response) => {
 }
 
 
+//GET DELETE CHARACTER FORM
+const delCharForm = (request, response) => {
+    let id = request.params['id'];
+    const queryString = 'SELECT * FROM characters WHERE id = $1'
+    let values = [id];
+    pool.query(queryString, values, (err, result) => {
+        if (err) {
+          console.error('Query error:', err.stack);
+        } else {
+          console.log('Query result:', result);
+
+          // redirect to home page
+          response.render( 'deleteChar', {characters: result.rows[0]} );
+        }
+    });
+}
+
+
 //DELETE CHARACTER FUNCTION
 const deleteChar = (request, response) => {
-  let charId = parseInt(request.params.id)
+  let id = parseInt(request.params.id)
   const queryString = 'DELETE from characters WHERE id = $1';
-  let values = [charId];
+  let values = [id];
   pool.query(queryString, values, (err, queryResult) => {
     if (err) {
       response.status(500).send('error 9: ' + err.message);
     } else {
-      // redirect to home page
-      response.redirect('/character');
-      response.send('Character Deleted');
+      response.render('deletedChar');
     }
 
   });
@@ -354,6 +370,7 @@ app.post('/character/new', postNewChar);
 app.get('/character/:id', getChar);
 app.get('/character/:id/edit', editCharForm);
 app.put('/character/:id/edit', updateChar);
+app.get('/character/:id/delete', delCharForm)
 app.delete('/character/:id/delete', deleteChar);
 
 

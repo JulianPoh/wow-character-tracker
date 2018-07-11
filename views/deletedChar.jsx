@@ -1,6 +1,6 @@
 var React = require("react");
 
-class CreatedChar extends React.Component {
+class Logout extends React.Component {
   render() {
   
     const bodyStyle = {
@@ -41,8 +41,8 @@ class CreatedChar extends React.Component {
             
               <img src="/img/wow-logo.png" style={logoStyle}/>
               <br/> 
-            <h2 style={h1Style}> EDITED CHARACTER </h2>
-            <a href="/user/userhome"><button style={buttonStyle}>RETURN HOME</button></a>
+            <h2 style={h1Style}> CHARACTER DELETED </h2>
+            <a href="/user/userhome"><button style={buttonStyle}>RETURN HOME</button></a>              
             </div>
           
           </body>
@@ -52,4 +52,4 @@ class CreatedChar extends React.Component {
     }
   }
 
-module.exports = CreatedChar;
+module.exports = Logout;
