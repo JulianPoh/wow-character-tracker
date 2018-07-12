@@ -54,7 +54,8 @@ const factionSelection = document.getElementById("select-faction");
 const raceSelection = document.getElementById("select-race");
 const classSelection = document.getElementById("select-class");
 const infoText = document.getElementById("info-text");
-const infoPic = document.getElementById("img-window";)
+const infoPic = document.getElementById("img-window");
+const classPic = document.createElement("img");
 const pageBody = document.body;
 
 
@@ -89,7 +90,12 @@ factionSelection.addEventListener('change', function() {
 
 //INSERT CLASS OPTIONS BASED ON RACE SELECTION    
 raceSelection.addEventListener('change', function() {
-    if (raceSelection.value == "Human") {
+    if (raceSelection.value == "Human") {        
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/human.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = humanDesc;
         classSelection.options.length = 0;
@@ -100,6 +106,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(humanClassOptions);
         }        
     } else if (raceSelection.value == "Dwarf") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/dwarf.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = dwarfDesc;
         classSelection.options.length = 0;
@@ -110,6 +121,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(dwarfClassOptions);
         }
     } else if (raceSelection.value == "Night Elf") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/nelf.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = nelfDesc;
         classSelection.options.length = 0;
@@ -120,6 +136,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(nElfClassOptions);
         }
     } else if (raceSelection.value == "Gnome") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/gnome.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = gnomeDesc;
         classSelection.options.length = 0;
@@ -130,6 +151,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(gnomeClassOptions);
         }
     } else if (raceSelection.value == "Draenei") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/draenei.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = draeneiDesc;
         classSelection.options.length = 0;
@@ -140,6 +166,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(draeneiClassOptions);
         }
     } else if (raceSelection.value == "Worgen") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/worgen.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = worgenDesc;
         classSelection.options.length = 0;
@@ -150,6 +181,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(worgenClassOptions);
         }
     } else if (raceSelection.value == "Orc") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/orc.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = orcDesc;
         classSelection.options.length = 0;
@@ -160,6 +196,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(orcClassOptions);
         }
     } else if (raceSelection.value == "Undead") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/undead.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = undeadDesc;
         classSelection.options.length = 0;
@@ -170,6 +211,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(undeadClassOptions);
         }
     } else if (raceSelection.value == "Blood Elf") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/belf.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = belfDesc;
         classSelection.options.length = 0;
@@ -180,6 +226,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(bElfClassOptions);
         }
     } else if (raceSelection.value == "Goblin") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/goblin.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = goblinDesc;
         classSelection.options.length = 0;
@@ -190,6 +241,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(goblinClassOptions);
         }
     } else if (raceSelection.value == "Troll") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/troll.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = trollDesc;
         classSelection.options.length = 0;
@@ -200,6 +256,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(trollClassOptions);
         }
     } else if (raceSelection.value == "Tauren") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/tauren.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = taurenDesc;
         classSelection.options.length = 0;
@@ -210,6 +271,11 @@ raceSelection.addEventListener('change', function() {
             classSelection.appendChild(taurenClassOptions);
         }
     } else if (raceSelection.value == "Pandaren") {
+        classPic.removeAttribute("src");
+        classPic.setAttribute("src", "/img/races/pandaren.png"); 
+        classPic.style.height = '200px';
+        classPic.style.width = 'auto';
+        infoPic.appendChild(classPic);
         infoText.innerHTML = "";
         infoText.innerHTML = pandarenDesc;
         classSelection.options.length = 0;

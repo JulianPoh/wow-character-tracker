@@ -60,6 +60,12 @@ class NewChar extends React.Component {
       textAlign: 'justify'
     }
 
+    const charImgStyle = {
+      height: '100px',
+      width: 'auto'
+    }
+
+
     return (
       <html>
           <head>
