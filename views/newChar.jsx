@@ -56,6 +56,10 @@ class NewChar extends React.Component {
       gridGap: '10px'
     }
 
+    const infoTextStyle = {
+      textAlign: 'justify'
+    }
+
     return (
       <html>
           <head>
@@ -72,7 +76,7 @@ class NewChar extends React.Component {
             <div className='char-container' style={wrapper}>
 
               <div id='info-window'>
-                <p id='info-text'></p>
+                <p id='info-text' style={infoTextStyle}></p>
               </div>
 
               <div>
@@ -111,7 +115,7 @@ class NewChar extends React.Component {
                 </form>
               </div>
 
-              <div>
+              <div id='img-window'>
               </div>
 
             </div>

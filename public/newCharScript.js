@@ -54,6 +54,7 @@ const factionSelection = document.getElementById("select-faction");
 const raceSelection = document.getElementById("select-race");
 const classSelection = document.getElementById("select-class");
 const infoText = document.getElementById("info-text");
+const infoPic = document.getElementById("img-window";)
 const pageBody = document.body;
 
 
