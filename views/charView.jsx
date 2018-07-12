@@ -3,11 +3,12 @@ var React = require("react");
 class Character extends React.Component {
   render() {
 
+
     const bodyStyle = {
       fontFamily: 'Averia Libre',
       textDecoration: 'none',
       verticalAlign: 'center',
-      backgroundImage: "URL('/img/slate.jpg')",
+      backgroundImage: "URL('/img/wow1.jpg')",
       backgroundSize: 'cover',
       color: 'gold',
       textShadow: '0 0 5px black'

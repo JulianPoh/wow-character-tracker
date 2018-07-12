@@ -7,7 +7,7 @@ class Home extends React.Component {
       fontFamily: 'Averia Libre',
       textDecoration: 'none',
       verticalAlign: 'center',
-      backgroundImage: "URL('/img/slate.jpg')",
+      backgroundImage: "URL('/img/wow3.jpg')",
       backgroundSize: 'cover',
       color: 'gold',
       textShadow: '0 0 5px black'
