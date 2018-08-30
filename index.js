@@ -374,12 +374,12 @@ app.get('/character/:id/delete', delCharForm)
 app.delete('/character/:id/delete', deleteChar);
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3001, () => {
     console.log(' ------------------------- ');
     console.log('|        {{{{{}}}}        |');
     console.log('|     {{{         }}}     |');
     console.log('|   {{{   PORTAL    }}}   |');
-    console.log('|  {{{     3000      }}}  |');
+    console.log('|  {{{     3001      }}}  |');
     console.log('|  {{{      TO       }}}  |');
     console.log('|   {{{   AZEROTH   }}}   |');
     console.log('|     {{{         }}}     |');
