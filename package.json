@@ -38,3 +38,7 @@
     "sha256": "^0.2.0"
   }
 }
+
+"scripts": {
+  "start": "node index.js"
+}
